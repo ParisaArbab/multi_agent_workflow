@@ -1,0 +1,18 @@
+[project]
+name = "multi-agent-research-report"
+version = "0.1.0"
+description = "A multi-agent workflow that researches a topic, summarizes it, and generates a report."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Your Name" }
+]
+dependencies = [
+    "langchain>=0.2.0",
+    "langgraph>=0.2.0",
+    "langchain-openai>=0.1.0",
+    "python-dotenv>=1.0.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
