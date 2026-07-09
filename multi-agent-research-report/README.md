@@ -207,6 +207,4 @@ You can improve this project by adding:
 - OpenAI API
 - dotenv
 
-## License
 
-This project is licensed under the MIT License.
