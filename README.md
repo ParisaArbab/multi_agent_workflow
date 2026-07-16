@@ -1,242 +1,302 @@
-# MCP AI Assistant
+# Multi-Agent Research Report Generator
 
-An MCP-based AI assistant project that connects an AI model to external tools.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![LangGraph](https://img.shields.io/badge/LangGraph-Multi--Agent-green)
+![LangChain](https://img.shields.io/badge/LangChain-LLM%20Workflow-orange)
+![OpenAI](https://img.shields.io/badge/OpenAI-API-lightgrey)
+![Tests](https://img.shields.io/badge/Tests-pytest-brightgreen)
+![Status](https://img.shields.io/badge/Status-Active%20Development-purple)
+![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red)
 
-This project shows how to build a small tool server using the **Model Context Protocol (MCP)**. The server exposes tools that an AI assistant can call when it needs to do real work, such as calculating, checking weather, reading a file, or fetching a web page.
+## Short Description
+
+Multi-Agent Research Report Generator is an AI workflow that researches a user topic, summarizes the findings, writes a structured report, and reviews the final output.
+
+It solves the problem of turning a broad topic into a clear report by separating the task across specialized AI agents.
 
 ## Features
 
-- MCP server built with `FastMCP`
-- External tool examples:
-  - Calculator
-  - Weather lookup
-  - Local text file reader
-  - URL text fetcher
-- Clean Python package structure
-- Simple demo script
-- Unit tests
-- GitHub Actions CI workflow
-- `.env.example` file for configuration
+✅ Topic-based research workflow  
+✅ Multi-agent task separation  
+✅ Research summarization  
+✅ Structured report generation  
+✅ Final report review and improvement  
+✅ Markdown report export  
+✅ Simple CLI interface  
+✅ GitHub-friendly project structure  
+✅ Basic unit test and GitHub Actions workflow  
+
+## Architecture Diagram
+
+![Architecture Diagram](docs/architecture.png)
+
+```text
+User Topic
+   ↓
+Python CLI
+   ↓
+LangGraph Workflow
+   ↓
+Research Agent
+   ↓
+Summary Agent
+   ↓
+Report Writer Agent
+   ↓
+Review Agent
+   ↓
+Final Markdown Report
+```
+
+## Tech Stack
+
+- Python
+- LangGraph
+- LangChain
+- OpenAI API
+- python-dotenv
+- pytest
+- GitHub Actions
+- Markdown
+
+## Skills Demonstrated ⭐
+
+- Python
+- Software Engineering
+- AI Agents
+- Multi-Agent Workflows
+- LangGraph
+- LangChain
+- OpenAI API
+- Prompt Engineering
+- Report Generation
+- Workflow Orchestration
+- LLM Application Development
+- Unit Testing
+- GitHub Actions
+- CLI Development
+- Backend Project Structure
+- Documentation
 
 ## Project Structure
 
 ```text
-mcp-ai-assistant/
-├── .github/
-│   └── workflows/
-│       └── python-ci.yml
-├── examples/
-│   ├── claude_desktop_config.json
-│   └── sample_notes.txt
-├── src/
-│   └── mcp_ai_assistant/
-│       ├── __init__.py
-│       ├── config.py
-│       ├── demo.py
-│       ├── server.py
-│       └── tool_logic.py
-├── tests/
-│   └── test_tool_logic.py
-├── .env.example
-├── .gitignore
-├── LICENSE
+multi-agent-research-report/
+│
+├── app.py
+├── main.py
+├── requirements.txt
 ├── pyproject.toml
-└── README.md
+├── README.md
+├── LICENSE
+├── .gitignore
+├── .env.example
+│
+├── docs/
+│   ├── architecture.png
+│   ├── demo.md
+│   ├── evaluation.md
+│   └── screenshots/
+│       └── terminal-output.png
+│
+├── src/
+│   └── multi_agent_report/
+│       ├── __init__.py
+│       ├── agents.py
+│       ├── config.py
+│       ├── workflow.py
+│       └── utils.py
+│
+├── tests/
+│   └── test_utils.py
+│
+└── .github/
+    └── workflows/
+        └── tests.yml
 ```
 
-## What Each File Does
+## Installation
 
-### `src/mcp_ai_assistant/server.py`
-
-This is the MCP server. It exposes tools that an AI assistant can use.
-
-Available tools:
-
-- `calculate(expression)`: solves simple math expressions.
-- `weather(city)`: gets weather from a public web service.
-- `read_file(path, max_chars)`: reads a local text file.
-- `fetch_url(url, max_chars)`: fetches a web page and returns a short text preview.
-
-### `src/mcp_ai_assistant/tool_logic.py`
-
-This file contains the real logic behind the tools.
-
-The MCP server imports functions from this file. This makes the code easier to test because the tool logic is separate from the MCP server code.
-
-### `src/mcp_ai_assistant/demo.py`
-
-This is a simple demo script. It does not need an LLM. It directly calls the same functions used by the MCP tools.
-
-Use it to quickly check that the project works.
-
-### `src/mcp_ai_assistant/config.py`
-
-This file loads environment variables from `.env`.
-
-### `examples/claude_desktop_config.json`
-
-This is an example MCP configuration for Claude Desktop or any MCP-compatible client. You may need to adjust the Python path depending on your system.
-
-### `examples/sample_notes.txt`
-
-A small sample file for testing the `read_file` tool.
-
-### `tests/test_tool_logic.py`
-
-Unit tests for calculator and file-reading logic.
-
-### `.github/workflows/python-ci.yml`
-
-A GitHub Actions workflow that installs the project, runs tests, and checks code style.
-
-## Requirements
-
-- Python 3.10 or higher
-- pip
-
-## Setup
-
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/mcp-ai-assistant.git
-cd mcp-ai-assistant
+git clone https://github.com/ParisaArbab/multi-agent-research-report.git
+cd multi-agent-research-report
 ```
 
-Create and activate a virtual environment:
+### 2. Create a virtual environment
 
 ```bash
 python -m venv .venv
+```
+
+For macOS or Linux:
+
+```bash
 source .venv/bin/activate
 ```
 
-On Windows:
+For Windows:
 
 ```bash
-python -m venv .venv
 .venv\Scripts\activate
 ```
 
-Install the project:
+### 3. Install dependencies
 
 ```bash
-pip install -e ".[dev]"
+pip install -r requirements.txt
 ```
 
-Create your environment file:
+### 4. Add your OpenAI API key
 
 ```bash
 cp .env.example .env
 ```
 
-## Run the Demo
+Then edit `.env`:
+
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+### 5. Run the project
+
+For macOS or Linux:
 
 ```bash
-python -m mcp_ai_assistant.demo
+PYTHONPATH=src python app.py
 ```
 
-This runs a simple calculator test and a weather lookup.
+For Windows PowerShell:
 
-## Run the MCP Server
-
-```bash
-python -m mcp_ai_assistant.server
+```powershell
+$env:PYTHONPATH="src"; python app.py
 ```
 
-The server runs over stdio, which is the common setup for local MCP clients.
+## Usage
 
-## Connect to an MCP Client
+Enter any research topic when the program asks for input.
 
-You can connect this server to an MCP-compatible client.
-
-Example configuration:
-
-```json
-{
-  "mcpServers": {
-    "mcp-ai-assistant-tools": {
-      "command": "python",
-      "args": ["-m", "mcp_ai_assistant.server"],
-      "env": {}
-    }
-  }
-}
-```
-
-If your client cannot find the package, run the client from the project folder or install the project first:
-
-```bash
-pip install -e .
-```
-
-## Example Tool Requests
-
-After connecting the server to an MCP client, try questions like:
+Example:
 
 ```text
-Calculate 25 * (7 + 3).
+Enter a research topic: Agentic AI in cybersecurity
 ```
+
+The project prints the final report in the terminal and saves it here:
 
 ```text
-What is the weather in New York?
+outputs/final_report.md
 ```
+
+## Screenshot
+
+![Terminal Output](docs/screenshots/terminal-output.png)
+
+## Example Output
 
 ```text
-Read examples/sample_notes.txt and summarize it.
+Issue:
+A broad research topic can be hard to organize into a clear report.
+
+Recommendation:
+Use separate AI agents for research, summarization, report writing, and review.
+
+Generated Output:
+A structured Markdown report with introduction, main discussion, benefits, challenges, applications, and conclusion.
+
+Confidence:
+High, because each agent has one clear responsibility.
 ```
+
+## How It Works
+
+The user enters a topic. The LangGraph workflow sends the topic to the Research Agent. The research result goes to the Summary Agent. The summary and research go to the Report Writer Agent. The draft report then goes to the Review Agent, which improves clarity, grammar, and structure. The final report is saved as a Markdown file.
 
 ```text
-Fetch https://example.com and tell me what it says.
+Topic
+↓
+Research Agent
+↓
+Summary Agent
+↓
+Report Writer Agent
+↓
+Review Agent
+↓
+Markdown Report
 ```
 
-## Run Tests
+## Evaluation / Results
+
+| Evaluation Area | Current Result |
+|---|---|
+| Report structure | Includes title, introduction, discussion, benefits, challenges, applications, and conclusion |
+| Output format | Saves final report as Markdown |
+| Workflow quality | Uses clear multi-agent separation |
+| Test coverage | Includes a basic unit test for report saving |
+| Human evaluation | Can be scored for clarity, usefulness, and completeness |
+| LLM evaluation | Can be added to score the final report automatically |
+
+More details are available in [`docs/evaluation.md`](docs/evaluation.md).
+
+## Challenges
+
+- LLMs can hallucinate information.
+- Long topics may exceed token limits.
+- The current version does not include live web search.
+- The report quality depends on prompt design.
+- Source citation support can be improved.
+
+## Future Improvements
+
+- Add real web search with citations.
+- Add FastAPI endpoints.
+- Add Streamlit or React UI.
+- Add PDF export.
+- Add human approval before final report generation.
+- Add memory for previous research topics.
+- Add streaming output.
+- Add Docker support.
+- Add stronger automated evaluation.
+
+## Tests
+
+Run tests with:
 
 ```bash
 pytest
 ```
 
-Run code style check:
+This project also includes a GitHub Actions workflow:
 
-```bash
-ruff check .
+```text
+.github/workflows/tests.yml
 ```
 
-## How This Project Works
+## Demo
 
-The project has three main parts:
+A 30 second demo can show:
 
-1. **MCP server**: exposes tools to the assistant.
-2. **Tool logic**: contains normal Python functions for each tool.
-3. **MCP client**: an external app, such as Claude Desktop or another MCP-compatible assistant, can call the server tools.
+1. Running the project from the terminal
+2. Entering a topic
+3. Viewing the generated report
+4. Opening `outputs/final_report.md`
 
-The AI assistant does not need to know how each tool is built. It only sees the tool names, descriptions, and inputs. When the assistant needs help, it asks the MCP server to run the correct tool.
+Demo notes are available in [`docs/demo.md`](docs/demo.md).
 
-## Possible Improvements
+## Project Status
 
-You can extend this project by adding:
-
-- Database search tool
-- Google Drive tool
-- GitHub issue reader
-- Email draft tool
-- RAG tool with ChromaDB
-- Authentication and permission checks
-- More detailed logging
-- Docker support
-
-## Safety Notes
-
-Be careful with tools that read files or call external services.
-
-For production use, add:
-
-- File access limits
-- URL allowlists or blocklists
-- Rate limits
-- Better error handling
-- User permission checks
-- Logging and monitoring
+Under Active Development
 
 ## License
 
-This project is licensed under the MIT License.
+This project is for educational and portfolio purposes. All rights reserved by the author.
+
+## Author
+
+**Parisa Arbab**
+
+GitHub: https://github.com/ParisaArbab  
+LinkedIn: https://www.linkedin.com/in/parisa-arbab
